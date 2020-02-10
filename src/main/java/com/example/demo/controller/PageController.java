@@ -15,12 +15,11 @@ public class PageController{
         return "hello";
     }
     @RequestMapping("/hello2")
-	public String hello2(@RequestParam(value = "name", required = false,
-			defaultValue = "Thanos") String name, Model model) {
+	public String hello2(@RequestParam(value = "name") String name, Model model) {
 		model.addAttribute("name", name);
 		return "hello2";
     }
-    @RequestMapping("/hello2/{name}")
+    @RequestMapping(value = {"/hello2", "/hello2/{name}"})
     public String helloPath(@PathVariable Optional<String> name, Model model) {
     	if(name.isPresent()) {
     		model.addAttribute("name", name.get());
