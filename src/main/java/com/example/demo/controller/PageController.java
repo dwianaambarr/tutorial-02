@@ -38,47 +38,65 @@ public class PageController{
 		String x = String.valueOf(sum);
 		String[] x_split = x.split("");
 		int x_integer0 = Integer.parseInt(x_split[0]);
-		String hasil = null;
+		String con = null;
 		
 		if(sum <= 11) {
-		hasil = number1 + " + "+ number2 +" = "+ sum +" ("+ angka[sum - 1] + ")";
+		con = angka[sum - 1];
 		} else if (sum < 20) {
 			int x_integer1 = Integer.parseInt(x_split[1]);
-			hasil = number1 + " + " + number2 + " = " + sum + " ("+ angka[x_integer1 - 1] + " " + angka[11] + ")";
+			con = angka[x_integer1 - 1] + " " + angka[11];
 		} else if (sum < 100) {
 			int x_integer1 = Integer.parseInt(x_split[1]);
 			if(x_integer1 == 0) {
-				hasil = number1 + " + " + number2 + " = " + sum + " ("+ angka[x_integer0 - 1] + " " + angka[12] + ")";
+				con = angka[x_integer0 - 1] + " " + angka[12];
 			} else {
-				hasil = number1 + " + " + number2 + " = " + sum + " ("+ angka[x_integer0 - 1] + " " + angka[12] + " " + angka[x_integer1 - 1] + ")";
+				con = angka[x_integer0 - 1] + " " + angka[12] + " " + angka[x_integer1 - 1];
 			}
 		} else if (sum < 1000){
 			int x_integer1 = Integer.parseInt(x_split[1]);
 			int x_integer2 = Integer.parseInt(x_split[2]);
 			if ((x_integer1 == 0) && (x_integer2 == 0)) {
 				if(x_integer0 == 1) {
-					hasil = number1 + " + " + number2 + " = " + sum + " ("+ angka[14] + ")";
+					con = angka[14];
 				} else {
-					hasil = number1 + " + " + number2 + " = " + sum + " ("+ angka[x_integer0 - 1] + " " + angka[13] + ")";
+					con = angka[x_integer0 - 1] + " " + angka[13] ;
 				}
-			}
-			else if (x_integer0 == 1) {
+			} else if(x_integer2 == 0) {
+				if(x_integer0 == 1) {
+					if(x_integer1 == 1) {
+						con = angka[14] + " " + angka[9];
+					} else{
+						con = angka[14] + " " + angka[x_integer1 - 1] + " " + angka[12];
+					}
+				} else { 
+					con = angka[x_integer0 - 1] + " " + angka[13] + " " + angka[x_integer1 - 1] + " " + angka[12];
+				}
+			} else if (x_integer1 == 1) {
+				if(x_integer2 == 1) {
+					con = angka[14] + " " + angka[10];
+				} else {
+					con = angka[14] + " " + angka[x_integer2 - 1] + " " + angka[11];
+				}
+			}else if (x_integer0 == 1) {
 				if(x_integer1 == 0) {
-					hasil = number1 + " + " + number2 + " = " + sum + " ("+ angka[14] + " " + angka[x_integer2 - 1] + ")";
+					con = angka[14] + " " + angka[x_integer2 - 1];
 				} else {
-					hasil = number1 + " + " + number2 + " = " + sum + " ("+ angka[14] + " " + angka[x_integer1 - 1] + " " + angka[12] + " " + angka[x_integer2 - 1] + ")";
+					con = angka[14] + " " + angka[x_integer1 - 1] + " " + angka[12] + " " + angka[x_integer2 - 1];
 				}
-			}else {
+			} else {
 				if(x_integer1 == 0) {
-					hasil = number1 + " + " + number2 + " = " + sum + " ("+ angka[x_integer0 - 1] + " " + angka[13] + " " + angka[x_integer2 - 1] + ")";
+					con = angka[x_integer0 - 1] + " " + angka[13] + " " + angka[x_integer2 - 1] + ")";
 				} else {
-					hasil = number1 + " + " + number2 + " = " + sum + " ("+ angka[x_integer0 - 1] + " " + angka[13] + " " + angka[x_integer1 - 1] + " " + angka[12] + " " + angka[x_integer2 - 1] + ")";
+					con = angka[x_integer0 - 1] + " " + angka[13] + " " + angka[x_integer1 - 1] + " " + angka[12] + " " + angka[x_integer2 - 1];
 				}
-			}
+			} 
 		} else {
 		}
 		
-		model.addAttribute("hasil", hasil);
+		model.addAttribute("number1", number1);
+		model.addAttribute("number2", number2);
+		model.addAttribute("sum", sum);
+		model.addAttribute("con", con);
 		return "calcu-convert";
 	}
 }
